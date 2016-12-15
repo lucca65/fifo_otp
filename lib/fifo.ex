@@ -1,0 +1,2 @@
+defmodule Fifo do
+end
