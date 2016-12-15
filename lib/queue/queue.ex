@@ -22,6 +22,10 @@ defmodule Fifo.Queue do
     GenServer.call({:global, queue_name}, :state)
   end
 
+  def kill(queue_name) do
+    GenServer.stop({:global, queue_name})
+  end
+
   # Server
   def handle_call({:put, elem}, _from, state) do
     {:reply, state} = put_elem(state, elem)

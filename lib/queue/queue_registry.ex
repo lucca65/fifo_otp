@@ -26,6 +26,9 @@ defmodule Fifo.QueueRegistry do
       {:noreply, state}
     else
       {:ok, queue_pid} = Fifo.Queue.start_link(name)
+      # Change here when persisting queues
+      # use some information that is unique to each connection
+      # to use as key
       {:noreply, Map.put(state, name, name)}
     end
   end
