@@ -28,12 +28,12 @@ defmodule Fifo.Queue do
 
   # Server
   def handle_call({:put, elem}, _from, state) do
-    {:reply, state} = put_elem(state, elem)
-    {:reply, :ok, state}
+    {:reply, :ok, state ++ [elem]}
   end
 
   def handle_call(:get, _from, state) do
-    get_elem(state)
+    [elem|rest] = state
+    {:reply, elem, rest}
   end
 
   def handle_call(:state, _from, state) do
@@ -46,12 +46,6 @@ defmodule Fifo.Queue do
   end
 
   defp put_elem(state, new_elem) do
-    state = state ++ [new_elem]
-    {:reply, state}
-  end
-
-  defp get_elem(state) do
-    [elem|rest] = state
-    {:reply, elem, rest}
+    {:reply, state ++ [new_elem]}
   end
 end
