@@ -14,7 +14,7 @@ defmodule Fifo.Server do
   def handle_cast(:listener, socket) do
     # require IEx; IEx.pry
     {:ok, accept} = :gen_tcp.accept(socket)
-    Fifo.Server.Supervisor.start_socket() # starts a new child
+    # Fifo.Server.Supervisor.start_socket() # starts a new child
     # listen with once, query the user with the welcome message
     send_message(accept, "Welcome, queue created for you?", [])
     {:noreply, socket}
